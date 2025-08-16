@@ -161,7 +161,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
               <div key={item.id} className="min-w-full flex-shrink-0">
                 <div className="relative h-[700px] md:h-[400px] flex flex-col md:flex-row">
                   {/* Content Section */}
-                  <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10">
+                  <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10 w-[350px]">
                     <div className="mb-4">
                       <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-3">
                         {item.subtitle.toUpperCase()}
