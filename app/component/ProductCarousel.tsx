@@ -144,69 +144,79 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
     );
   }
 
-  const currentItem = items[currentIndex];
-
   return (
     <div className="w-full max-w-7xl mx-auto p-8">
       <div 
-        className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl"
+        className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="relative h-[700px] md:h-[400px] flex flex-col md:flex-row">
-          {/* Content Section */}
-          <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10">
-            <div className="mb-4">
-              <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-3">
-                {currentItem.subtitle.toUpperCase()}
-              </span>
-              <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight mb-4">
-                {currentItem.title}
-              </h1>
-              <div className="mb-6">
-                <span className="inline-block px-4 py-1 bg-cyan-700 text-white text-lg font-bold rounded-lg shadow-lg">
-                  {currentItem.discount}
-                </span>
-              </div>
-              
-              {currentItem.price && (
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="text-xl md:text-2xl font-bold text-white">₹{" "}{currentItem.price}</span>
-                  {currentItem.originalPrice && (
-                    <span className="text-base md:text-lg text-white/70 line-through">₹ {" "}{currentItem.originalPrice}</span>
-                  )}
+        {/* Sliding Container */}
+        <div className="relative">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {items.map((item, index) => (
+              <div key={item.id} className="min-w-full flex-shrink-0">
+                <div className="relative h-[700px] md:h-[400px] flex flex-col md:flex-row">
+                  {/* Content Section */}
+                  <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10">
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-3">
+                        {item.subtitle.toUpperCase()}
+                      </span>
+                      <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight mb-4">
+                        {item.title}
+                      </h1>
+                      <div className="mb-6">
+                        <span className="inline-block px-4 py-1 bg-cyan-700 text-white text-lg font-bold rounded-lg shadow-lg">
+                          {item.discount}
+                        </span>
+                      </div>
+                      
+                      {item.price && (
+                        <div className="flex items-center gap-4 mb-6">
+                          <span className="text-xl md:text-2xl font-bold text-white">₹{" "}{item.price}</span>
+                          {item.originalPrice && (
+                            <span className="text-base md:text-lg text-white/70 line-through">₹ {" "}{item.originalPrice}</span>
+                          )}
+                        </div>
+                      )}
+
+                      <div className="flex gap-3">
+                        <button className="flex items-center gap-2 px-6 py-3 bg-white text-gray-800 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 shadow-lg">
+                          <ShoppingCart size={20} />
+                          Shop Now
+                        </button>
+                        <button 
+                          onClick={() => toggleFavorite(item.id)}
+                          className={`p-3 rounded-lg transition-all duration-200 shadow-lg ${
+                            favorites.has(item.id) 
+                              ? 'bg-cyan-500 text-white hover:bg-cyan-950' 
+                              : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
+                          }`}
+                        >
+                          <Heart size={20} fill={favorites.has(item.id) ? 'currentColor' : 'none'} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Image Section */}
+                  <div className="flex-1 relative">
+                    <div className="absolute inset-0 overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
                 </div>
-              )}
-
-              <div className="flex gap-3">
-                <button className="flex items-center gap-2 px-6 py-3 bg-white text-gray-800 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 shadow-lg">
-                  <ShoppingCart size={20} />
-                  Shop Now
-                </button>
-                <button 
-                  onClick={() => toggleFavorite(currentItem.id)}
-                  className={`p-3 rounded-lg transition-all duration-200 shadow-lg ${
-                    favorites.has(currentItem.id) 
-                      ? 'bg-cyan-500 text-white hover:bg-cyan-950' 
-                      : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
-                  }`}
-                >
-                  <Heart size={20} fill={favorites.has(currentItem.id) ? 'currentColor' : 'none'} />
-                </button>
               </div>
-            </div>
-          </div>
-
-          {/* Image Section */}
-          <div className="flex-1 relative">
-            <div className="absolute inset-0 overflow-hidden">
-              <Image
-                src={currentItem.image}
-                alt={currentItem.title}
-                className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
-            </div>
+            ))}
           </div>
         </div>
 
