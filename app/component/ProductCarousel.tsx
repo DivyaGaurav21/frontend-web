@@ -147,12 +147,12 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   return (
     <div className="w-full max-w-7xl mx-auto p-8">
       <div 
-        className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl overflow-hidden"
+        className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Sliding Container */}
-        <div className="relative">
+        <div className="relative overflow-hidden rounded-3xl">
           <div 
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
