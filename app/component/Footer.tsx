@@ -82,7 +82,7 @@ const Footer: React.FC<FooterProps> = ({ data = footerData }) => {
                         </div>
 
                         {/* App Download */}
-                        <div>
+                        <div className='hidden md:block'>
                             <h3 className="text-lg font-semibold mb-4">{data.appDownload.title}</h3>
                             <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
                                 <a
@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ data = footerData }) => {
                                     className="block transition-transform hover:scale-105"
                                     aria-label={data.appDownload.appStore.alt}
                                 >
-                                    <div className="bg-black rounded-lg px-4 py-2 flex items-center space-x-2 min-w-[140px]">
+                                    <div className="bg-cyan-800 rounded-lg px-4 py-2 flex items-center space-x-2 min-w-[140px]">
                                         <div className="text-white">
                                             <div className="text-xs">Download on the</div>
                                             <div className="text-lg font-semibold">App Store</div>
@@ -103,7 +103,7 @@ const Footer: React.FC<FooterProps> = ({ data = footerData }) => {
                                     className="block transition-transform hover:scale-105"
                                     aria-label={data.appDownload.googlePlay.alt}
                                 >
-                                    <div className="bg-black rounded-lg px-4 py-2 flex items-center space-x-2 min-w-[140px]">
+                                    <div className="bg-cyan-800 rounded-lg px-4 py-2 flex items-center space-x-2 min-w-[140px]">
                                         <div className="text-white">
                                             <div className="text-xs">GET IT ON</div>
                                             <div className="text-lg font-semibold">Google Play</div>
