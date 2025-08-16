@@ -145,7 +145,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-8">
+    <div className="w-full max-w-7xl mx-auto p-7">
       <div 
         className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
@@ -161,7 +161,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
               <div key={item.id} className="min-w-full flex-shrink-0">
                 <div className="relative h-[700px] md:h-[400px] flex flex-col md:flex-row">
                   {/* Content Section */}
-                  <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10 w-[350px]">
+                  <div className="flex-1 p-8 md:p-12 flex flex-col justify-center z-10 w-[300px]">
                     <div className="mb-4">
                       <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-3">
                         {item.subtitle.toUpperCase()}
