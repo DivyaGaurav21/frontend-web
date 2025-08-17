@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingCart, Star, Heart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import useCartStore from '../store/cart-store';
 
 interface Product {
   _id: string;
@@ -20,10 +21,12 @@ interface Product {
 
 interface ItemProps {
   product: Product;
-  onAddToCart: (product: Product) => void;
+  onAddToCart: (e: React.MouseEvent, product: Product) => void;
 }
 
 const Item: React.FC<ItemProps> = ({ product, onAddToCart }) => {
+  const {isInCart} = useCartStore();
+  const itemPresentInCart = isInCart(product._id);
   const calculateOriginalPrice = (price: number, discount: number) => {
     return Math.round(price / (1 - discount / 100));
   };
@@ -101,17 +104,17 @@ const Item: React.FC<ItemProps> = ({ product, onAddToCart }) => {
 
         {/* Add to Cart Button */}
         <button
-          onClick={() => onAddToCart(product)}
-          disabled={product.stock === 0}
-          className={`w-full py-2 px-4 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
-            product.stock === 0
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-[#008ECC] text-white hover:bg-[#007BB8] hover:shadow-md'
+          onClick={(e) => onAddToCart(e , product)}
+          disabled={product.stock === 0 || itemPresentInCart}
+          className={`w-full py-2 px-4 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2  ${
+            product.stock === 0 || itemPresentInCart
+              ? 'bg-cyan-100 text-gray-700 cursor-not-allowed'
+              : 'bg-[#008ECC] text-white hover:bg-[#007BB8] hover:shadow-md cursor-pointer'
           }`}
         >
           <ShoppingCart className="w-4 h-4" />
           <span>
-            {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+            {product.stock === 0 ? 'Out of Stock' : itemPresentInCart ? 'Go to Cart' : 'Add to Cart'}
           </span>
         </button>
       </div>

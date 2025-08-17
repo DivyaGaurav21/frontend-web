@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import Button from '../components/ui/Button';
+import useCartStore from '../store/cart-store';
 
 interface Product {
   _id: string;
@@ -16,6 +17,7 @@ interface Product {
   images: string[];
   createdAt: string;
   updatedAt: string;
+  __v: number
 }
 
 interface ApiResponse {
@@ -24,6 +26,7 @@ interface ApiResponse {
 }
 
 const ProductList: React.FC = () => {
+  const { addToCart, openCart, isInCart, getItemById } = useCartStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +40,7 @@ const ProductList: React.FC = () => {
       setLoading(true);
       const response = await fetch('/api/products');
       const data: ApiResponse = await response.json();
-      
+
       if (data.success) {
         setProducts(data.data);
       } else {
@@ -50,10 +53,10 @@ const ProductList: React.FC = () => {
       setLoading(false);
     }
   };
-
-  const handleAddToCart = (product: Product) => {
-    console.log('Add to cart:', product);
-    // Cart functionality will be added later
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product);
   };
 
   if (loading) {

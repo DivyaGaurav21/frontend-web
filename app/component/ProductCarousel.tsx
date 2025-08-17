@@ -145,7 +145,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-7 xl:px-0">
+    <div className="w-full max-w-7xl mx-auto p-3 md:p-7 xl:px-0">
       <div 
         className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
@@ -223,14 +223,14 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute -left-6 top-1/2 transform -translate-y-1/2 text-[#008ECC] border border-[#008ECC] p-3 rounded-full bg-cyan-200 z-20"
+          className="hidden md:block absolute -left-6 top-1/2 transform -translate-y-1/2 text-[#008ECC] border border-[#008ECC] p-3 rounded-full bg-cyan-200 z-20"
           aria-label="Previous slide"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute -right-6 top-1/2 transform -translate-y-1/2 text-[#008ECC] border border-[#008ECC] p-3 rounded-full bg-cyan-200 z-20"
+          className="hidden md:block absolute -right-6 top-1/2 transform -translate-y-1/2 text-[#008ECC] border border-[#008ECC] p-3 rounded-full bg-cyan-200 z-20"
           aria-label="Next slide"
         >
           <ChevronRight size={24} />
