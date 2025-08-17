@@ -46,7 +46,7 @@ const Item: React.FC<ItemProps> = ({ product, onAddToCart }) => {
   const discountedPrice = product.price;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group max-w-sm cursor-pointer">
+    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group hover:border border-cyan-300 cursor-pointer">
       {/* Product Image */}
       <div className="relative overflow-hidden min-h-72 bg-gray-50">
         <Image

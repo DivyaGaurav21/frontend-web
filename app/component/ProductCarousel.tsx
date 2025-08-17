@@ -145,7 +145,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-7">
+    <div className="w-full max-w-7xl mx-auto p-7 xl:px-0">
       <div 
         className="relative bg-gradient-to-r from-[#008ECC] to-cyan-400 md:to-transparent rounded-3xl shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
