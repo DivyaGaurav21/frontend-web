@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingCart, Star, Heart } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Product {
   _id: string;
@@ -46,7 +47,7 @@ const Item: React.FC<ItemProps> = ({ product, onAddToCart }) => {
   const discountedPrice = product.price;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group hover:border border-cyan-300 cursor-pointer">
+    <Link href={`/product/${product._id}`} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group hover:border border-cyan-300">
       {/* Product Image */}
       <div className="relative overflow-hidden min-h-72 bg-gray-50">
         <Image
@@ -114,7 +115,7 @@ const Item: React.FC<ItemProps> = ({ product, onAddToCart }) => {
           </span>
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -9,6 +9,8 @@ import oven from "@/app/assets/home/oven.png";
 import cooler from "@/app/assets/home/cooler.png";
 import freeze from "@/app/assets/home/freeze.png";
 
+// href={`/productList?category=${encodeURIComponent(item.nameLink)}`}
+
 const staticLinkData = [
     {
         id: 1,
@@ -119,7 +121,7 @@ const CategoryItem = () => {
 
                                 {/* Clickable Link */}
                                 <Link
-                                    href={`/productList?category=${encodeURIComponent(item.nameLink)}`}
+                                    href={`/`}
                                     className="absolute inset-0 z-10"
                                     aria-label={`Browse ${item.nameLink}`}
                                 />
