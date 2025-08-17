@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Star, ShoppingCart, Verified, Home, ChevronRight } from 'lucide-react';
+import useCartStore from '../store/cart-store';
 
 // Types
 interface Product {
@@ -66,6 +67,8 @@ const StarRating = ({ rating }: { rating: number }) => (
 
 // Main Product Detail Component
 const SingleProductDetail = ({ productData }: { productData: Product }) => {
+   const {isInCart , addToCart} = useCartStore();
+  const itemPresentInCart = isInCart(productData._id);
   const [selectedImage, setSelectedImage] = useState(productData?.images[0] || '');
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -94,8 +97,7 @@ const SingleProductDetail = ({ productData }: { productData: Product }) => {
   ];
 
   const addToCartHandler = () => {
-    // Add your cart logic here
-    console.log('Added to cart:', productData.name);
+    addToCart(productData);
   };
 
   return (
@@ -194,15 +196,15 @@ const SingleProductDetail = ({ productData }: { productData: Product }) => {
               <div className="mb-6">
                 <button
                   onClick={addToCartHandler}
-                  disabled={!inStock}
+                  disabled={!inStock || itemPresentInCart}
                   className={`w-full sm:w-auto px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-2 ${
-                    inStock
+                    inStock && !itemPresentInCart
                       ? 'bg-primary hover:bg-cyan-800 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  {inStock ? 'Add to Cart' : 'Out of Stock'}
+                  {inStock ? itemPresentInCart ? "Go to Cart" : "Add to Cart" : 'Out of Stock'}
                 </button>
               </div>
 

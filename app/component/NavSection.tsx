@@ -2,12 +2,21 @@
 import React, { useState } from 'react';
 import { Search, User, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import useCartStore from '../store/cart-store';
+import CartModal from './CartModal';
 
 const NavSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const { getTotalCartItemsNumber, openCart } = useCartStore();
+  const totalCartItem = getTotalCartItemsNumber();
+
+   const handleCartClick = (): void => {
+    openCart();
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+       <CartModal/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
         <div className="flex items-center justify-between h-20">
 
@@ -41,10 +50,15 @@ const NavSection: React.FC = () => {
             </div>
 
             {/* Cart */}
-            <div className="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg">
+            <button
+              onClick={handleCartClick}
+              className="flex items-center space-x-1 bg-primary text-white px-4 py-2 rounded-lg">
               <ShoppingCart className="h-5 w-5" />
               <span className="font-bold hidden sm:block">Cart</span>
-            </div>
+              <span className="bg-white primary rounded-full px-2 py-1 text-xs font-semibold m">
+                {totalCartItem}
+              </span>
+            </button>
           </div>
         </div>
       </div>
